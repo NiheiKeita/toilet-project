@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mic, MicOff, Type } from 'lucide-react';
+import { stalls } from '../constant/toilet';
 
 const ToiletStall: React.FC = () => {
   const { stallId } = useParams();
@@ -10,6 +11,7 @@ const ToiletStall: React.FC = () => {
   const [isFlushing, setIsFlushing] = useState(false);
   const [flushWords, setFlushWords] = useState<string[]>([]);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const stall = stalls.find(stall => stall.id === Number(stallId));
 
   useEffect(() => {
     // Initialize speech recognition
@@ -213,7 +215,7 @@ const ToiletStall: React.FC = () => {
           <div className="space-y-6">
             {/* Instructions */}
             <div className="text-center text-gray-600">
-              <p className="mb-2">嫌な思い出や言葉を入力して、レバーを引いて水に流しましょう</p>
+              <p className="mb-2">{stall?.message}</p>
               <p className="text-sm text-gray-500">
                 {inputText.length > 0 && `${inputText.length}文字入力済み`}
               </p>

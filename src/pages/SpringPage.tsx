@@ -23,6 +23,7 @@ const SpringPage: React.FC = () => {
     const storedWords = JSON.parse(localStorage.getItem('flushedWords') || '[]');
 
     // Create floating words
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const words = storedWords.map((word: any, index: number) => ({
       id: `${word.timestamp}-${index}`,
       text: word.text,

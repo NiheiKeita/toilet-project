@@ -21,8 +21,9 @@ const SpringPage: React.FC = () => {
   useEffect(() => {
     // Load flushed words from localStorage
     const storedWords = JSON.parse(localStorage.getItem('flushedWords') || '[]');
-    
+
     // Create floating words
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const words = storedWords.map((word: any, index: number) => ({
       id: `${word.timestamp}-${index}`,
       text: word.text,
@@ -42,7 +43,7 @@ const SpringPage: React.FC = () => {
 
     // Animation loop for sinking effect
     const animationInterval = setInterval(() => {
-      setFloatingWords(prevWords => 
+      setFloatingWords(prevWords =>
         prevWords.map(word => ({
           ...word,
           y: word.y + word.sinkSpeed,
@@ -60,7 +61,7 @@ const SpringPage: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-blue-200 to-blue-400">
         {/* Water surface animation */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-blue-100 opacity-60 animate-gentle-wave"></div>
-        
+
         {/* Underwater bubbles */}
         {[...Array(12)].map((_, i) => (
           <div
@@ -90,7 +91,7 @@ const SpringPage: React.FC = () => {
               <h1 className="text-2xl font-bold text-white">言葉の泉</h1>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4 text-white">
             <div className="flex items-center space-x-1">
               <Users className="w-4 h-4" />
@@ -100,7 +101,7 @@ const SpringPage: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 mb-6">
+        <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-4 mb-6">
           <div className="flex justify-between items-center text-white">
             <div>
               <p className="text-sm opacity-80">現在漂っている言葉</p>
@@ -138,10 +139,10 @@ const SpringPage: React.FC = () => {
       <div className="absolute bottom-6 left-6 right-6 z-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center">
           <p className="text-gray-700 mb-2">
-            世界中の人々が流した言葉が、この泉で静かに沈んでいきます
+            これまで自分が流した言葉が、この泉で静かに沈んでいきます
           </p>
           <p className="text-gray-500 text-sm">
-            あなたの心の重荷も、時間と共に軽やかになっていくでしょう
+            あなたの心の重荷も、時間と共に軽やかになっていくでしょう。
           </p>
         </div>
       </div>

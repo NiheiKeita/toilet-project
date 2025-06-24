@@ -77,7 +77,7 @@ const ToiletStall: React.FC = () => {
         stallId: stallId
       }));
       localStorage.setItem('flushedWords', JSON.stringify([...existingWords, ...newWords]));
-      
+
       navigate('/complete');
     }, 4000);
   };
@@ -101,36 +101,35 @@ const ToiletStall: React.FC = () => {
         <div className="flex justify-center mb-8">
           <div className="relative">
             {/* Toilet Bowl - More realistic shape */}
-            <div className={`w-72 h-96 bg-white border-8 border-gray-200 shadow-2xl relative overflow-hidden transition-all duration-300 ${
-              isFlushing ? 'animate-shake' : ''
-            }`}
-            style={{
-              borderRadius: '50% 50% 40% 40% / 30% 30% 70% 70%',
-              clipPath: 'ellipse(50% 60% at 50% 40%)'
-            }}>
-              
+            <div className={`w-72 h-96 bg-white border-8 border-gray-200 shadow-2xl relative overflow-hidden transition-all duration-300 ${isFlushing ? 'animate-shake' : ''
+              }`}
+              style={{
+                borderRadius: '50% 50% 50% 50% / 30% 30% 70% 70%',
+                clipPath: 'ellipse(50% 60% at 50% 40%)'
+              }}>
+
               {/* Inner bowl shadow for depth */}
               <div className="absolute inset-4 rounded-full bg-gradient-to-b from-gray-50 to-gray-100 shadow-inner"
                 style={{
                   clipPath: 'ellipse(90% 85% at 50% 50%)'
                 }}></div>
-              
+
               {/* Water - fills entire bowl when flushing */}
-              <div className={`absolute transition-all duration-1000 ${
-                isFlushing 
-                  ? 'inset-4 animate-swirl' 
-                  : 'bottom-6 left-6 right-6 h-20 animate-gentle-wave'
-              }`}
-              style={{
-                background: isFlushing 
-                  ? 'conic-gradient(from 0deg, #1e40af, #3b82f6, #60a5fa, #93c5fd, #1e40af)'
-                  : 'linear-gradient(to bottom, #bfdbfe, #60a5fa)',
-                borderRadius: isFlushing 
-                  ? '50% 50% 45% 45% / 25% 25% 75% 75%'
-                  : '50% 50% 45% 45% / 25% 25% 75% 75%',
-                clipPath: 'ellipse(90% 85% at 50% 50%)'
-              }}>
-                
+              <div className={`absolute transition-all duration-1000 ${isFlushing
+                // ? '-top-8 -left-16 animate-swirl w-[400px] h-[400px]'
+                ? 'bottom-6 left-6 right-6 h-80 animate-gentle-wave'
+                : 'bottom-6 left-6 right-6 h-80 animate-gentle-wave'
+                }`}
+                style={{
+                  background: isFlushing
+                    ? 'conic-gradient(from 0deg, #1e40af, #3b82f6, #60a5fa, #93c5fd, #1e40af)'
+                    : 'linear-gradient(to bottom, #bfdbfe, #60a5fa)',
+                  borderRadius: isFlushing
+                    ? '90% 90% 90% 90% / 90% 90% 90% 90%'
+                    : '50% 50% 45% 45% / 25% 25% 75% 75%',
+                  clipPath: 'ellipse(90% 85% at 50% 50%)'
+                }}>
+
                 {/* Flushing Words */}
                 {isFlushing && flushWords.map((word, index) => (
                   <div
@@ -147,64 +146,63 @@ const ToiletStall: React.FC = () => {
                     {word}
                   </div>
                 ))}
-                
+
                 {/* Water surface ripples - only when not flushing */}
                 {!isFlushing && (
                   <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
                 )}
-                
+
                 {/* Swirling water effect when flushing */}
-                {isFlushing && (
+                {/* {isFlushing && (
                   <>
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-blue-600/30 animate-spin-slow rounded-full"></div>
-                    <div className="absolute inset-4 bg-gradient-to-tl from-blue-300/40 to-blue-500/40 animate-spin-slow rounded-full" style={{ animationDirection: 'reverse' }}></div>
+                    <div className="absolute top-28 left-28 bg-gradient-to-br from-blue-400/30 to-blue-600/30 animate-spin-slow rounded-full w-16 h-16"></div>
+                    <div className="absolute top-0 bg-gradient-to-br from-blue-500/30 to-blue-800/30 animate-spin-slow rounded-full w-16 h-16"></div>
+                    <div className="absolute top-0 left-28 bg-gradient-to-tl from-blue-300/40 to-blue-500/40 animate-spin-slow rounded-full w-16 h-16" style={{ animationDirection: 'reverse' }}></div>
                   </>
-                )}
+                )} */}
               </div>
-              
+
               {/* Drain hole at the bottom - only visible when not flushing */}
-              {!isFlushing && (
+              {/* {!isFlushing && (
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gray-800 rounded-full shadow-inner"></div>
-              )}
+              )} */}
             </div>
-            
+
             {/* Realistic Flush Lever */}
             <div className="absolute -right-12 top-16">
               <button
                 onClick={handleFlush}
                 disabled={!inputText.trim() || isFlushing}
-                className={`relative transition-all duration-300 ${
-                  !inputText.trim() || isFlushing
-                    ? 'cursor-not-allowed'
-                    : 'cursor-pointer hover:scale-105'
-                } ${isFlushing ? 'animate-press-down' : ''}`}
+                className={`relative transition-all duration-300 -mr-6 ${!inputText.trim() || isFlushing
+                  ? 'cursor-not-allowed'
+                  : 'cursor-pointer hover:scale-105'
+                  } ${isFlushing ? 'animate-press-down' : ''}`}
               >
                 {/* Lever base/mount */}
-                <div className="w-8 h-6 bg-gradient-to-b from-gray-300 to-gray-400 rounded-t-lg shadow-lg"></div>
-                
+                <div className="w-12 h-9  bg-gradient-to-b from-gray-300 to-gray-400 rounded-t-lg shadow-lg"></div>
+
                 {/* Lever handle */}
-                <div className={`w-4 h-16 rounded-full shadow-lg transform-gpu transition-all duration-300 ${
-                  !inputText.trim() || isFlushing
-                    ? 'bg-gradient-to-r from-gray-400 to-gray-500'
-                    : 'bg-gradient-to-r from-chrome-400 to-chrome-600 hover:from-chrome-500 hover:to-chrome-700'
-                } ${isFlushing ? 'rotate-12' : 'hover:rotate-6'}`}
-                style={{
-                  marginLeft: '8px',
-                  marginTop: '-4px',
-                  background: !inputText.trim() || isFlushing 
-                    ? 'linear-gradient(135deg, #9ca3af, #6b7280)' 
-                    : 'linear-gradient(135deg, #e5e7eb, #9ca3af, #6b7280)',
-                  boxShadow: '2px 2px 8px rgba(0,0,0,0.3), inset 1px 1px 2px rgba(255,255,255,0.3)'
-                }}>
-                  
+                <div className={`w-5 h-24 rounded-full shadow-lg transform-gpu transition-all duration-300 ${!inputText.trim() || isFlushing
+                  ? 'bg-gradient-to-r from-gray-400 to-gray-500'
+                  : 'bg-gradient-to-r from-chrome-400 to-chrome-600 hover:from-chrome-500 hover:to-chrome-700'
+                  } ${isFlushing ? 'rotate-12' : 'hover:rotate-6'}`}
+                  style={{
+                    marginLeft: '14px',
+                    marginTop: '-4px',
+                    background: !inputText.trim() || isFlushing
+                      ? 'linear-gradient(135deg, #9ca3af, #6b7280)'
+                      : 'linear-gradient(135deg, #e5e7eb, #9ca3af, #6b7280)',
+                    boxShadow: '2px 2px 8px rgba(0,0,0,0.3), inset 1px 1px 2px rgba(255,255,255,0.3)'
+                  }}>
+
                   {/* Lever grip texture */}
                   <div className="absolute inset-1 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white/30 rounded-full"></div>
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full"></div>
                   <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-black/20 rounded-full"></div>
                 </div>
-                
+
                 {/* Lever connection */}
-                <div className="absolute top-6 left-2 w-6 h-2 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full shadow-inner"></div>
+                {/* <div className="absolute top-6 left-2 w-12 h-4 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full shadow-inner"></div> */}
               </button>
             </div>
           </div>
@@ -213,6 +211,13 @@ const ToiletStall: React.FC = () => {
         {/* Input Section */}
         {!isFlushing && (
           <div className="space-y-6">
+            {/* Instructions */}
+            <div className="text-center text-gray-600">
+              <p className="mb-2">嫌な思い出や言葉を入力して、レバーを引いて水に流しましょう</p>
+              <p className="text-sm text-gray-500">
+                {inputText.length > 0 && `${inputText.length}文字入力済み`}
+              </p>
+            </div>
             {/* Text Input */}
             <div className="relative">
               <textarea
@@ -229,11 +234,10 @@ const ToiletStall: React.FC = () => {
             <div className="flex justify-center">
               <button
                 onClick={toggleListening}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  isListening
-                    ? 'bg-red-100 text-red-600 animate-pulse'
-                    : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
-                }`}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${isListening
+                  ? 'bg-red-100 text-red-600 animate-pulse'
+                  : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+                  }`}
               >
                 {isListening ? (
                   <>
@@ -249,13 +253,6 @@ const ToiletStall: React.FC = () => {
               </button>
             </div>
 
-            {/* Instructions */}
-            <div className="text-center text-gray-600">
-              <p className="mb-2">嫌な思い出や言葉を入力して、水に流しましょう</p>
-              <p className="text-sm text-gray-500">
-                {inputText.length > 0 && `${inputText.length}文字入力済み`}
-              </p>
-            </div>
           </div>
         )}
 

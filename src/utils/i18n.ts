@@ -16,8 +16,8 @@ export const languages: Language[] = [
 export const translations = {
   ja: {
     // Landing Page
-    title: '洗い流したい言葉メーカー',
-    subtitle: '心の重荷を、水に流しませんか？',
+    title: '心のトイレ',
+    subtitle: 'その言葉、そっと水に流しませんか？',
     start: 'はじめる',
     feature1Title: '流して清める',
     feature1Desc: '嫌な言葉や思い出を、トイレに流してスッキリ',
@@ -26,7 +26,7 @@ export const translations = {
     feature3Title: 'みんなで共有',
     feature3Desc: '世界中の人が流した言葉を、美しいアートで体感',
     tagline: 'あなたの心を軽やかに。今すぐ体験してみてください。',
-    
+
     // Toilet Selection
     selectStall: '個室を選んでください',
     stallA: '個室A',
@@ -43,7 +43,7 @@ export const translations = {
     privacy: 'プライベートな空間で、安心してご利用いただけます',
     entering: '個室に入っています...',
     welcome: 'お入りください',
-    
+
     // Toilet Stall
     stallTitle: '個室',
     tiredMessage: '疲れの原因やメールのメッセージを入力して、レバーを引いて水に流しましょう',
@@ -56,7 +56,7 @@ export const translations = {
     charactersEntered: '文字入力済み',
     flushing: '流しています...',
     flushingMessage: 'あなたの心の重荷が軽くなっていきます',
-    
+
     // Complete Page
     flushed: '流れました！',
     flushSuccess: 'あなたの心の重荷が水と共に流れていきました',
@@ -64,21 +64,21 @@ export const translations = {
     viewSpring: '泉を見に行く',
     backToStart: '最初に戻る',
     encouragement: 'あなたは一歩前進しました。心の平静を大切にしてください。',
-    
+
     // Spring Page
     springTitle: '言葉の泉',
     currentWords: '現在漂っている言葉',
     totalWords: 'これまでの総数',
-    springMessage: '世界中の人々が流した言葉が、この泉で静かに沈んでいきます',
+    springMessage: '自分の流した言葉がこの泉で静かに眠ります。',
     springSubMessage: 'あなたの心の重荷も、時間と共に軽やかになっていくでしょう',
     flushAgain: 'もう一度流す',
     words: 'words',
   },
-  
+
   en: {
     // Landing Page
-    title: 'Word Flushing Maker',
-    subtitle: 'Let the water wash away your burdens',
+    title: 'Toilet of the Heart',
+    subtitle: 'Why not gently let those words flow away?',
     start: 'Get Started',
     feature1Title: 'Flush & Cleanse',
     feature1Desc: 'Flush away negative words and memories for a fresh start',
@@ -87,7 +87,7 @@ export const translations = {
     feature3Title: 'Shared Experience',
     feature3Desc: 'Experience beautiful art from words flushed worldwide',
     tagline: 'Lighten your heart. Try it now.',
-    
+
     // Toilet Selection
     selectStall: 'Choose a Stall',
     stallA: 'Stall A',
@@ -104,7 +104,7 @@ export const translations = {
     privacy: 'Private space for your comfort and peace of mind',
     entering: 'Entering stall...',
     welcome: 'Please come in',
-    
+
     // Toilet Stall
     stallTitle: 'Stall',
     tiredMessage: 'Enter the cause of your fatigue or email messages, then pull the lever to flush them away',
@@ -117,7 +117,7 @@ export const translations = {
     charactersEntered: 'characters entered',
     flushing: 'Flushing...',
     flushingMessage: 'Your emotional burden is becoming lighter',
-    
+
     // Complete Page
     flushed: 'Flushed Away!',
     flushSuccess: 'Your emotional burden has flowed away with the water',
@@ -125,21 +125,21 @@ export const translations = {
     viewSpring: 'Visit the Spring',
     backToStart: 'Back to Start',
     encouragement: 'You have taken a step forward. Cherish your peace of mind.',
-    
+
     // Spring Page
     springTitle: 'Word Spring',
     currentWords: 'Currently floating words',
     totalWords: 'Total words so far',
-    springMessage: 'Words flushed by people worldwide sink quietly in this spring',
+    springMessage: 'The words you have flushed now rest quietly in this spring.',
     springSubMessage: 'Your emotional burdens will also become lighter with time',
     flushAgain: 'Flush Again',
     words: 'words',
   },
-  
+
   ko: {
     // Landing Page
-    title: '씻어내고 싶은 말 메이커',
-    subtitle: '마음의 짐을 물에 흘려보내지 않으시겠어요?',
+    title: '마음의 화장실',
+    subtitle: '그 말을 조용히 물에 흘려보내지 않으시겠어요?',
     start: '시작하기',
     feature1Title: '흘려보내고 정화하기',
     feature1Desc: '싫은 말이나 기억을 변기에 흘려보내고 시원하게',
@@ -148,7 +148,7 @@ export const translations = {
     feature3Title: '모두와 공유',
     feature3Desc: '전 세계 사람들이 흘려보낸 말을 아름다운 아트로 체험',
     tagline: '당신의 마음을 가볍게. 지금 바로 체험해보세요.',
-    
+
     // Toilet Selection
     selectStall: '개실을 선택해주세요',
     stallA: '개실A',
@@ -165,7 +165,7 @@ export const translations = {
     privacy: '프라이빗한 공간에서 안심하고 이용하실 수 있습니다',
     entering: '개실에 들어가고 있습니다...',
     welcome: '들어오세요',
-    
+
     // Toilet Stall
     stallTitle: '개실',
     tiredMessage: '피로의 원인이나 이메일 메시지를 입력하고 레버를 당겨 물에 흘려보내세요',
@@ -178,7 +178,7 @@ export const translations = {
     charactersEntered: '글자 입력됨',
     flushing: '흘려보내는 중...',
     flushingMessage: '당신의 마음의 짐이 가벼워지고 있습니다',
-    
+
     // Complete Page
     flushed: '흘려보냈습니다!',
     flushSuccess: '당신의 마음의 짐이 물과 함께 흘러갔습니다',
@@ -186,21 +186,21 @@ export const translations = {
     viewSpring: '샘 보러가기',
     backToStart: '처음으로 돌아가기',
     encouragement: '당신은 한 걸음 전진했습니다. 마음의 평정을 소중히 하세요.',
-    
+
     // Spring Page
     springTitle: '말의 샘',
     currentWords: '현재 떠다니는 말',
     totalWords: '지금까지의 총 개수',
-    springMessage: '전 세계 사람들이 흘려보낸 말이 이 샘에서 조용히 가라앉고 있습니다',
+    springMessage: '당신이 흘려보낸 말이 이 샘에서 조용히 잠듭니다.',
     springSubMessage: '당신의 마음의 짐도 시간과 함께 가벼워질 것입니다',
     flushAgain: '다시 흘려보내기',
     words: 'words',
   },
-  
+
   zh: {
     // Landing Page
-    title: '冲走话语制造器',
-    subtitle: '让水流冲走心中的负担吧',
+    title: '心灵的厕所',
+    subtitle: '要不要让那些话语悄悄随水流走呢？',
     start: '开始',
     feature1Title: '冲洗净化',
     feature1Desc: '将讨厌的话语和回忆冲进马桶，让心情舒畅',
@@ -209,7 +209,7 @@ export const translations = {
     feature3Title: '共同分享',
     feature3Desc: '通过美丽的艺术体验全世界人们冲走的话语',
     tagline: '让你的心灵轻松起来。现在就来体验吧。',
-    
+
     // Toilet Selection
     selectStall: '请选择隔间',
     stallA: '隔间A',
@@ -226,7 +226,7 @@ export const translations = {
     privacy: '私人空间，让您安心使用',
     entering: '正在进入隔间...',
     welcome: '请进',
-    
+
     // Toilet Stall
     stallTitle: '隔间',
     tiredMessage: '输入疲劳的原因或邮件信息，然后拉动杠杆冲走它们',
@@ -239,7 +239,7 @@ export const translations = {
     charactersEntered: '个字符已输入',
     flushing: '正在冲洗...',
     flushingMessage: '你心中的负担正在变轻',
-    
+
     // Complete Page
     flushed: '冲走了！',
     flushSuccess: '你心中的负担已经随水流走了',
@@ -247,21 +247,21 @@ export const translations = {
     viewSpring: '去看泉水',
     backToStart: '回到开始',
     encouragement: '你向前迈进了一步。请珍惜内心的平静。',
-    
+
     // Spring Page
     springTitle: '话语之泉',
     currentWords: '目前漂浮的话语',
     totalWords: '至今为止的总数',
-    springMessage: '全世界人们冲走的话语在这个泉水中静静沉淀',
+    springMessage: '你冲走的话语在这个泉水中静静地沉睡。',
     springSubMessage: '你心中的负担也会随着时间变得轻松',
     flushAgain: '再次冲洗',
     words: '个词',
   },
-  
+
   es: {
     // Landing Page
-    title: 'Creador de Palabras para Lavar',
-    subtitle: '¿Dejamos que el agua se lleve tus cargas?',
+    title: 'El baño del corazón',
+    subtitle: '¿Por qué no dejas que esas palabras se vayan suavemente?',
     start: 'Comenzar',
     feature1Title: 'Lavar y Purificar',
     feature1Desc: 'Tira palabras y recuerdos negativos al inodoro para sentirte mejor',
@@ -270,7 +270,7 @@ export const translations = {
     feature3Title: 'Compartir con Todos',
     feature3Desc: 'Experimenta arte hermoso con palabras de todo el mundo',
     tagline: 'Alivia tu corazón. Pruébalo ahora.',
-    
+
     // Toilet Selection
     selectStall: 'Elige un Cubículo',
     stallA: 'Cubículo A',
@@ -287,7 +287,7 @@ export const translations = {
     privacy: 'Espacio privado para tu comodidad y tranquilidad',
     entering: 'Entrando al cubículo...',
     welcome: 'Por favor, pasa',
-    
+
     // Toilet Stall
     stallTitle: 'Cubículo',
     tiredMessage: 'Ingresa la causa de tu fatiga o mensajes de correo, luego tira de la palanca para lavarlos',
@@ -300,7 +300,7 @@ export const translations = {
     charactersEntered: 'caracteres ingresados',
     flushing: 'Lavando...',
     flushingMessage: 'Tu carga emocional se está aliviando',
-    
+
     // Complete Page
     flushed: '¡Lavado!',
     flushSuccess: 'Tu carga emocional se ha ido con el agua',
@@ -308,21 +308,21 @@ export const translations = {
     viewSpring: 'Visitar el Manantial',
     backToStart: 'Volver al Inicio',
     encouragement: 'Has dado un paso adelante. Valora tu paz mental.',
-    
+
     // Spring Page
     springTitle: 'Manantial de Palabras',
     currentWords: 'Palabras flotando actualmente',
     totalWords: 'Total de palabras hasta ahora',
-    springMessage: 'Las palabras lavadas por personas de todo el mundo se hunden silenciosamente en este manantial',
+    springMessage: 'Las palabras que has lavado descansan tranquilamente en este manantial.',
     springSubMessage: 'Tus cargas emocionales también se volverán más ligeras con el tiempo',
     flushAgain: 'Lavar de Nuevo',
     words: 'palabras',
   },
-  
+
   fr: {
     // Landing Page
-    title: 'Créateur de Mots à Évacuer',
-    subtitle: 'Laissons l\'eau emporter vos fardeaux',
+    title: 'Toilettes du cœur',
+    subtitle: 'Pourquoi ne pas laisser ces mots s\'écouler doucement ?',
     start: 'Commencer',
     feature1Title: 'Évacuer et Purifier',
     feature1Desc: 'Tirez la chasse sur les mots et souvenirs négatifs pour vous sentir mieux',
@@ -331,7 +331,7 @@ export const translations = {
     feature3Title: 'Partage Universel',
     feature3Desc: 'Vivez un art magnifique avec les mots du monde entier',
     tagline: 'Allégez votre cœur. Essayez maintenant.',
-    
+
     // Toilet Selection
     selectStall: 'Choisissez une Cabine',
     stallA: 'Cabine A',
@@ -341,14 +341,14 @@ export const translations = {
     tiredPeople: 'Pour ceux qui se sentent fatigués dernièrement',
     goodThings: 'Pour ceux qui ont eu de bonnes choses',
     badThings: 'Pour ceux qui ont eu de mauvaises choses dernièrement',
-    anythingFlush: 'Pour ceux qui veulent évacuer n\'importe quoi',
+    anythingFlush: "Pour ceux qui veulent évacuer n'importe quoi",
     occupied: 'Occupé',
     available: 'Disponible',
     instruction: 'Choisissez une cabine disponible pour évacuer vos fardeaux',
     privacy: 'Espace privé pour votre confort et tranquillité d\'esprit',
     entering: 'Entrée dans la cabine...',
     welcome: 'Veuillez entrer',
-    
+
     // Toilet Stall
     stallTitle: 'Cabine',
     tiredMessage: 'Entrez la cause de votre fatigue ou les messages d\'email, puis tirez le levier pour les évacuer',
@@ -360,21 +360,21 @@ export const translations = {
     flushInstruction: 'Entrez des pensées ou mots négatifs et évacuez-les',
     charactersEntered: 'caractères saisis',
     flushing: 'Évacuation...',
-    flushingMessage: 'Votre fardeau émotionnel s\'allège',
-    
+    flushingMessage: "Votre fardeau émotionnel s'allège",
+
     // Complete Page
     flushed: 'Évacué !',
-    flushSuccess: 'Votre fardeau émotionnel s\'est écoulé avec l\'eau',
+    flushSuccess: "Votre fardeau émotionnel s'est écoulé avec l'eau",
     heartLight: 'Votre cœur se sent plus léger maintenant',
     viewSpring: 'Visiter la Source',
     backToStart: 'Retour au Début',
     encouragement: 'Vous avez fait un pas en avant. Chérissez votre paix intérieure.',
-    
+
     // Spring Page
     springTitle: 'Source des Mots',
     currentWords: 'Mots flottant actuellement',
-    totalWords: 'Total des mots jusqu\'à présent',
-    springMessage: 'Les mots évacués par des gens du monde entier coulent silencieusement dans cette source',
+    totalWords: "Total des mots jusqu'à présent",
+    springMessage: 'Les mots que vous avez évacués reposent tranquillement dans cette source.',
     springSubMessage: 'Vos fardeaux émotionnels deviendront aussi plus légers avec le temps',
     flushAgain: 'Évacuer à Nouveau',
     words: 'mots',

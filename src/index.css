@@ -56,6 +56,14 @@
   .animate-spin-slow {
     animation: spin 3s linear infinite;
   }
+  
+  .animate-door-open {
+    animation: doorOpen 1.2s ease-out forwards;
+  }
+  
+  .animate-enter-room {
+    animation: enterRoom 1.5s ease-out forwards;
+  }
 }
 
 @keyframes fadeIn {
@@ -204,6 +212,36 @@
   }
 }
 
+@keyframes doorOpen {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: perspective(1000px) rotateY(-75deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes enterRoom {
+  0% {
+    transform: scale(1) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1) translateZ(50px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.3) translateZ(100px);
+    opacity: 0;
+  }
+}
+
 /* Background gradient animation */
 .bg-gradient-conic {
   background: conic-gradient(from 0deg, #bfdbfe, transparent, #bfdbfe);
@@ -226,4 +264,12 @@
 }
 .to-chrome-700 {
   --tw-gradient-to: #6b7280;
+}
+
+/* 3D door rotation utilities */
+.rotate-y-0 {
+  transform: perspective(1000px) rotateY(0deg);
+}
+.rotate-y-90 {
+  transform: perspective(1000px) rotateY(-90deg);
 }

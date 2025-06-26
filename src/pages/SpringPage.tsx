@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Waves, Users } from 'lucide-react';
+import LanguageSelector from '../components/LanguageSelector';
+import { getTranslation, getCurrentLanguage } from '../utils/i18n';
 
 interface FloatingWord {
   id: string;
@@ -17,13 +19,13 @@ const SpringPage: React.FC = () => {
   const navigate = useNavigate();
   const [floatingWords, setFloatingWords] = useState<FloatingWord[]>([]);
   const [stats, setStats] = useState({ totalWords: 0, activeWords: 0 });
+  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
 
   useEffect(() => {
     // Load flushed words from localStorage
     const storedWords = JSON.parse(localStorage.getItem('flushedWords') || '[]');
 
     // Create floating words
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const words = storedWords.map((word: any, index: number) => ({
       id: `${word.timestamp}-${index}`,
       text: word.text,
@@ -54,6 +56,10 @@ const SpringPage: React.FC = () => {
 
     return () => clearInterval(animationInterval);
   }, []);
+
+  const handleLanguageChange = (lang: string) => {
+    setCurrentLang(lang);
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -88,27 +94,36 @@ const SpringPage: React.FC = () => {
             </button>
             <div className="flex items-center space-x-2">
               <Waves className="w-8 h-8 text-white" />
-              <h1 className="text-2xl font-bold text-white">言葉の泉</h1>
+              <h1 className="text-2xl font-bold text-white">
+                {getTranslation('springTitle', currentLang)}
+              </h1>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4 text-white">
-            <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-4">
+            <LanguageSelector onLanguageChange={handleLanguageChange} />
+            <div className="flex items-center space-x-1 text-white">
               <Users className="w-4 h-4" />
-              <span className="text-sm">{stats.totalWords} words</span>
+              <span className="text-sm">
+                {stats.totalWords} {getTranslation('words', currentLang)}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-4 mb-6">
+        <div className="bg-black/10 backdrop-blur-sm rounded-2xl p-4 mb-6">
           <div className="flex justify-between items-center text-white">
             <div>
-              <p className="text-sm opacity-80">現在漂っている言葉</p>
+              <p className="text-sm opacity-80">
+                {getTranslation('currentWords', currentLang)}
+              </p>
               <p className="text-2xl font-bold">{stats.activeWords}</p>
             </div>
             <div>
-              <p className="text-sm opacity-80">これまでの総数</p>
+              <p className="text-sm opacity-80">
+                {getTranslation('totalWords', currentLang)}
+              </p>
               <p className="text-2xl font-bold">{stats.totalWords}</p>
             </div>
           </div>
@@ -139,10 +154,10 @@ const SpringPage: React.FC = () => {
       <div className="absolute bottom-6 left-6 right-6 z-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center">
           <p className="text-gray-700 mb-2">
-            これまで自分が流した言葉が、この泉で静かに沈んでいきます
+            {getTranslation('springMessage', currentLang)}
           </p>
           <p className="text-gray-500 text-sm">
-            あなたの心の重荷も、時間と共に軽やかになっていくでしょう。
+            {getTranslation('springSubMessage', currentLang)}
           </p>
         </div>
       </div>
@@ -153,7 +168,7 @@ const SpringPage: React.FC = () => {
           onClick={() => navigate('/toilet')}
           className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
         >
-          もう一度流す
+          {getTranslation('flushAgain', currentLang)}
         </button>
       </div>
     </div>

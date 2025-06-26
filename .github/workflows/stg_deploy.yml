@@ -1,0 +1,39 @@
+name: deploy to stg-xserver
+
+on: 
+  push:
+    tags:
+      - 'stg.v.*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Vite
+        run: npm run build
+
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.STG_FTP_SERVER }}
+          username: ${{ secrets.STG_FTP_USERNAME }}
+          password: ${{ secrets.STG_FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          exclude: |
+            **/node_modules/**
+            .env
+            tests/**
+            storage/**
+            *.log
+            *.cache

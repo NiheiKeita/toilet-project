@@ -90,11 +90,11 @@ const SpringPage: React.FC = () => {
               onClick={() => navigate('/')}
               className="mr-4 p-2 hover:bg-white/20 rounded-full transition-colors"
             >
-              <ArrowLeft className="w-6 h-6 text-white" />
+              <ArrowLeft className="w-6 h-6 text-gray-600" />
             </button>
             <div className="flex items-center space-x-2">
-              <Waves className="w-8 h-8 text-white" />
-              <h1 className="text-2xl font-bold text-white">
+              <Waves className="w-8 h-8 text-gray-600" />
+              <h1 className="text-2xl font-bold text-gray-600">
                 {getTranslation('springTitle', currentLang)}
               </h1>
             </div>
@@ -102,12 +102,12 @@ const SpringPage: React.FC = () => {
 
           <div className="flex items-center space-x-4">
             <LanguageSelector onLanguageChange={handleLanguageChange} />
-            <div className="flex items-center space-x-1 text-white">
+            {/* <div className="flex items-center space-x-1 text-white">
               <Users className="w-4 h-4" />
               <span className="text-sm">
                 {stats.totalWords} {getTranslation('words', currentLang)}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -21,7 +21,7 @@ const LandingPage: React.FC = () => {
 
       <div className="text-center max-w-4xl mx-auto">
         {/* Hero Section */}
-        <div className="mb-12 animate-fade-in">
+        <div className="mb-12 animate-fade-in mt-16">
           <div className="flex items-center justify-center mb-6">
             <Droplets className="text-blue-400 w-16 h-16 mr-4 animate-bounce" />
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">
@@ -50,7 +50,7 @@ const LandingPage: React.FC = () => {
               {getTranslation('feature1Desc', currentLang)}
             </p>
           </div>
-          
+
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-green-100 hover:border-green-200 transition-all duration-300 hover:transform hover:scale-105">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Heart className="w-8 h-8 text-green-500" />
@@ -62,7 +62,7 @@ const LandingPage: React.FC = () => {
               {getTranslation('feature2Desc', currentLang)}
             </p>
           </div>
-          
+
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-purple-100 hover:border-purple-200 transition-all duration-300 hover:transform hover:scale-105">
             <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Sparkles className="w-8 h-8 text-purple-500" />

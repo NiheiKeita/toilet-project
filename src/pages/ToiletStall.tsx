@@ -122,16 +122,16 @@ const ToiletStall: React.FC = () => {
             >
               <ArrowLeft className="w-6 h-6 text-gray-600" />
             </button>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-800">
-                {getTranslation(currentStall.name as any, currentLang)}
-              </h1>
-              <p className="text-gray-600 text-sm mt-1">
-                {getTranslation(currentStall.description as any, currentLang)}
-              </p>
-            </div>
           </div>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
+        </div>
+        {/* <h1 className="text-2xl font-bold text-gray-800">
+          {getTranslation(currentStall.name as any, currentLang)}
+        </h1> */}
+        <div>
+          <p className="text-gray-600 text-2xl mt-1 mb-4">
+            {getTranslation(currentStall.description as any, currentLang)}
+          </p>
         </div>
 
         {/* Stall Message */}
@@ -145,7 +145,7 @@ const ToiletStall: React.FC = () => {
         <div className="flex justify-center mb-8">
           <div className="relative">
             {/* Toilet Bowl - More realistic toilet shape */}
-            <div className="relative w-80 h-96">
+            <div className="relative w-56 md:w-80 h-96">
               {/* Toilet Tank */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-20 bg-white border-4 border-gray-300 rounded-t-2xl shadow-lg">
                 <div className="absolute inset-2 bg-gray-50 rounded-t-xl"></div>

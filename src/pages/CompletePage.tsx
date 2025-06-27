@@ -29,9 +29,8 @@ const CompletePage: React.FC = () => {
         <LanguageSelector onLanguageChange={handleLanguageChange} />
       </div>
 
-      <div className={`text-center max-w-lg mx-auto transition-all duration-1000 ${
-        showContent ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
-      }`}>
+      <div className={`text-center mt-6 max-w-lg mx-auto transition-all duration-1000 ${showContent ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-8'
+        }`}>
         {/* Success Icon */}
         <div className="mb-8">
           <div className="relative inline-block">
@@ -85,7 +84,7 @@ const CompletePage: React.FC = () => {
             <span>{getTranslation('viewSpring', currentLang)}</span>
             <ArrowRight className="w-5 h-5" />
           </button>
-          
+
           <button
             onClick={() => navigate('/')}
             className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-8 rounded-full border-2 border-gray-200 hover:border-gray-300 transition-all duration-300"

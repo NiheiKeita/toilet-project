@@ -25,7 +25,7 @@ const ToiletSelection: React.FC = () => {
         text: 'text-gray-500'
       };
     }
-    
+
     const themes = {
       blue: {
         door: 'bg-blue-100 hover:bg-blue-200 border-blue-300 hover:border-blue-400',
@@ -52,15 +52,15 @@ const ToiletSelection: React.FC = () => {
         text: 'text-pink-700'
       },
     };
-    
+
     return themes[theme as keyof typeof themes];
   };
 
   const handleStallClick = (stallId: number, occupied: boolean) => {
     if (occupied) return;
-    
+
     setOpeningStall(stallId);
-    
+
     // Wait for door opening animation, then navigate
     setTimeout(() => {
       navigate(`/toilet/${stallId}`);
@@ -84,38 +84,36 @@ const ToiletSelection: React.FC = () => {
             >
               <ArrowLeft className="w-6 h-6 text-gray-600" />
             </button>
-            <h1 className="text-3xl font-bold text-gray-800">
-              {getTranslation('selectStall', currentLang)}
-            </h1>
           </div>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
         </div>
 
+        <h1 className="text-3xl font-bold text-gray-800">
+          {getTranslation('selectStall', currentLang)}
+        </h1>
         {/* Toilet Stalls Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-8 mt-8">
           {stalls.map((stall) => {
             const themeClasses = getThemeClasses(stall.theme, stall.occupied);
             const isOpening = openingStall === stall.id;
-            
+
             return (
               <div
                 key={stall.id}
-                className={`relative transition-all duration-300 ${
-                  !stall.occupied && !openingStall ? 'hover:transform hover:scale-105 cursor-pointer' : 
+                className={`relative transition-all duration-300 ${!stall.occupied && !openingStall ? 'hover:transform hover:scale-105 cursor-pointer' :
                   stall.occupied ? 'cursor-not-allowed' : 'cursor-default'
-                }`}
+                  }`}
                 onClick={() => handleStallClick(stall.id, stall.occupied)}
               >
                 {/* Door Frame */}
                 <div className="relative w-full h-80 bg-gray-600 rounded-lg shadow-2xl p-2 overflow-hidden">
-                  
+
                   {/* Interior view (visible when door opens) */}
-                  <div className={`absolute inset-2 rounded-md bg-gradient-to-b from-gray-100 to-gray-200 transition-opacity duration-500 ${
-                    isOpening ? 'opacity-100' : 'opacity-0'
-                  }`}>
+                  <div className={`absolute inset-2 rounded-md bg-gradient-to-b from-gray-100 to-gray-200 transition-opacity duration-500 ${isOpening ? 'opacity-100' : 'opacity-0'
+                    }`}>
                     {/* Toilet interior background */}
                     <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-blue-100 rounded-md"></div>
-                    
+
                     {/* Realistic toilet from front view */}
                     <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
                       {/* Toilet tank */}
@@ -123,19 +121,19 @@ const ToiletSelection: React.FC = () => {
                         <div className="absolute inset-1 bg-gray-50 rounded-t-md"></div>
                         <div className="absolute top-2 left-2 right-2 h-0.5 bg-gray-200"></div>
                       </div>
-                      
+
                       {/* Toilet bowl - front view */}
                       <div className="relative w-24 h-20 bg-white border-2 border-gray-300 shadow-xl"
                         style={{
                           borderRadius: '50% 50% 30% 30% / 25% 25% 75% 75%'
                         }}>
-                        
+
                         {/* Inner bowl */}
                         <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-14 bg-gradient-to-b from-gray-100 to-gray-200 shadow-inner"
                           style={{
                             borderRadius: '50% 50% 40% 40% / 20% 20% 80% 80%'
                           }}>
-                          
+
                           {/* Water in bowl */}
                           <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-b from-blue-200 to-blue-300 opacity-80"
                             style={{
@@ -144,7 +142,7 @@ const ToiletSelection: React.FC = () => {
                             <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
                           </div>
                         </div>
-                        
+
                         {/* Toilet seat */}
                         <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-gradient-to-b from-gray-100 to-gray-200 border border-gray-300"
                           style={{
@@ -152,11 +150,11 @@ const ToiletSelection: React.FC = () => {
                           }}>
                         </div>
                       </div>
-                      
+
                       {/* Toilet base/floor connection */}
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-gray-300 rounded-full opacity-60"></div>
                     </div>
-                    
+
                     {/* Floor tiles pattern */}
                     <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200">
                       {/* Tile lines */}
@@ -166,7 +164,7 @@ const ToiletSelection: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Wall tiles */}
                     <div className="absolute inset-0 opacity-10">
                       <div className="grid grid-cols-6 grid-rows-8 gap-px h-full">
@@ -175,7 +173,7 @@ const ToiletSelection: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Welcome message */}
                     {isOpening && (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -187,19 +185,18 @@ const ToiletSelection: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Door */}
-                  <div 
-                    className={`relative w-full h-full rounded-md border-4 transition-all duration-1000 transform-gpu ${themeClasses.door} shadow-inner ${
-                      isOpening ? 'rotate-y-90 opacity-0' : 'rotate-y-0 opacity-100'
-                    }`}
+                  <div
+                    className={`relative w-full h-full rounded-md border-4 transition-all duration-1000 transform-gpu ${themeClasses.door} shadow-inner ${isOpening ? 'rotate-y-90 opacity-0' : 'rotate-y-0 opacity-100'
+                      }`}
                     style={{
                       transformOrigin: 'left center',
                       transformStyle: 'preserve-3d',
                       transform: isOpening ? 'perspective(1000px) rotateY(-90deg)' : 'perspective(1000px) rotateY(0deg)'
                     }}
                   >
-                    
+
                     {/* Door panels (traditional door design) */}
                     <div className="absolute inset-4 grid grid-rows-2 gap-4">
                       {/* Upper panel */}
@@ -207,18 +204,17 @@ const ToiletSelection: React.FC = () => {
                       {/* Lower panel */}
                       <div className="border-2 border-gray-300 rounded-sm bg-white/20 shadow-inner"></div>
                     </div>
-                    
+
                     {/* Door handle */}
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                      <div className={`w-4 h-8 rounded-full shadow-lg transition-all duration-300 ${themeClasses.handle} ${
-                        isOpening ? 'animate-pulse' : ''
-                      }`}>
+                      <div className={`w-4 h-8 rounded-full shadow-lg transition-all duration-300 ${themeClasses.handle} ${isOpening ? 'animate-pulse' : ''
+                        }`}>
                         <div className="absolute inset-0.5 bg-gradient-to-r from-white/30 to-transparent rounded-full"></div>
                       </div>
                       {/* Handle shadow */}
                       <div className="absolute top-1 -right-1 w-2 h-6 bg-black/20 rounded-full blur-sm"></div>
                     </div>
-                    
+
                     {/* Door hinges */}
                     <div className="absolute left-1 top-8 w-3 h-6 bg-gray-700 rounded-sm shadow-md">
                       <div className="absolute inset-0.5 bg-gradient-to-r from-gray-500 to-gray-600 rounded-sm"></div>
@@ -226,12 +222,11 @@ const ToiletSelection: React.FC = () => {
                     <div className="absolute left-1 bottom-8 w-3 h-6 bg-gray-700 rounded-sm shadow-md">
                       <div className="absolute inset-0.5 bg-gradient-to-r from-gray-500 to-gray-600 rounded-sm"></div>
                     </div>
-                    
+
                     {/* Occupied/Available indicator */}
                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                      <div className={`w-16 h-8 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${
-                        stall.occupied ? 'bg-red-500' : 'bg-green-500'
-                      } ${isOpening ? 'animate-bounce' : ''}`}>
+                      <div className={`w-16 h-8 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${stall.occupied ? 'bg-red-500' : 'bg-green-500'
+                        } ${isOpening ? 'animate-bounce' : ''}`}>
                         {stall.occupied ? (
                           <Lock className="w-4 h-4 text-white" />
                         ) : (
@@ -239,7 +234,7 @@ const ToiletSelection: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     {/* Door nameplate */}
                     <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
                       <div className="bg-white/90 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md border border-gray-200 text-center">
@@ -254,7 +249,7 @@ const ToiletSelection: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Occupied overlay effect */}
                     {stall.occupied && (
                       <div className="absolute inset-0 bg-gray-500/30 rounded-md flex items-center justify-center">
@@ -264,10 +259,10 @@ const ToiletSelection: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Door frame shadow */}
                   <div className="absolute inset-0 rounded-lg shadow-inner pointer-events-none"></div>
-                  
+
                   {/* Opening sound effect visual */}
                   {isOpening && (
                     <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
@@ -285,10 +280,10 @@ const ToiletSelection: React.FC = () => {
                     </div>
                   )}
                 </div>
-                
+
                 {/* Floor indicator */}
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gray-400 rounded-full shadow-sm"></div>
-                
+
                 {/* Entering effect overlay */}
                 {isOpening && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse pointer-events-none rounded-lg"></div>
@@ -306,7 +301,7 @@ const ToiletSelection: React.FC = () => {
           <p className="text-gray-500 text-sm">
             {getTranslation('privacy', currentLang)}
           </p>
-          
+
           {/* Loading message when door is opening */}
           {openingStall && (
             <div className="mt-6 animate-fade-in">

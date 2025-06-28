@@ -7,4 +7,13 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  define: {
+    'process.env': {},
+  },
+  envPrefix: 'VITE_',
+  server: {
+    headers: {
+      'Service-Worker-Allowed': '/',
+    },
+  },
 });

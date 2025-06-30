@@ -289,14 +289,14 @@ const SpringPage: React.FC = () => {
           <p className="mb-2 text-gray-700">
             {getTranslation('springMessage', currentLang)}
           </p>
-          <p className="text-sm text-gray-500">
+          {/* <p className="text-sm text-gray-500">
             {getTranslation('springSubMessage', currentLang)}
-          </p>
+          </p> */}
         </div>
       </div>
 
       {/* Action Button */}
-      <div className="absolute bottom-24 right-6 z-10">
+      <div className="absolute bottom-28 right-6 z-10 sm:bottom-24">
         <button
           onClick={() => router.push('/toilet')}
           className="rounded-full bg-gradient-to-r from-blue-500 to-green-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-600 hover:to-green-600 hover:shadow-xl"

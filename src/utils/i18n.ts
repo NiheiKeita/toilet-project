@@ -11,7 +11,7 @@ export const languages: Language[] = [
   { code: 'zh', name: '中文', flag: '🇨🇳' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
-];
+]
 
 export const translations = {
   ja: {
@@ -379,19 +379,26 @@ export const translations = {
     flushAgain: 'Évacuer à Nouveau',
     words: 'mots',
   },
-};
+}
 
-export type TranslationKey = keyof typeof translations.ja;
+export type TranslationKey = keyof typeof translations.ja
 
 export const getTranslation = (key: TranslationKey, lang: string = 'ja'): string => {
-  const langTranslations = translations[lang as keyof typeof translations] || translations.ja;
-  return langTranslations[key] || translations.ja[key];
-};
+  const langTranslations = translations[lang as keyof typeof translations] || translations.ja
+
+  return langTranslations[key] || translations.ja[key]
+}
 
 export const getCurrentLanguage = (): string => {
-  return localStorage.getItem('language') || 'ja';
-};
+  if (typeof window !== 'undefined' && window.localStorage) {
+    return localStorage.getItem('language') || 'ja'
+  }
+
+  return 'ja'
+}
 
 export const setCurrentLanguage = (lang: string): void => {
-  localStorage.setItem('language', lang);
-};
+  if (typeof window !== 'undefined' && window.localStorage) {
+    localStorage.setItem('language', lang)
+  }
+}

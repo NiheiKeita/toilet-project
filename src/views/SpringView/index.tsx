@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { ArrowLeft, Waves } from 'lucide-react'
 import LanguageSelector from '../../components/LanguageSelector'
 import { getTranslation, getCurrentLanguage } from '../../utils/i18n'
+import { useFCM } from '~/firebase/useFCM'
+import { useMount } from 'react-use'
 
 interface FloatingWord {
   id: string;
@@ -20,7 +22,16 @@ const SpringPage: React.FC = () => {
   const [floatingWords, setFloatingWords] = useState<FloatingWord[]>([])
   const [stats, setStats] = useState({ totalWords: 0, activeWords: 0 })
   const [currentLang, setCurrentLang] = useState('ja')
+  const { messages, fcmToken } = useFCM()
 
+  useMount(() => {
+    // 現在の通知許可状態を取得
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission !== 'granted') {
+      Notification.requestPermission().then((permission) => {
+        alert(permission)
+      })
+    }
+  })
   useEffect(() => {
     // クライアントサイドでのみ言語を取得
     setCurrentLang(getCurrentLanguage())
@@ -65,6 +76,7 @@ const SpringPage: React.FC = () => {
   const handleLanguageChange = (lang: string) => {
     setCurrentLang(lang)
   }
+
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -175,6 +187,10 @@ const SpringPage: React.FC = () => {
         >
           {getTranslation('flushAgain', currentLang)}
         </button>
+      </div>
+      <div className='rounded-lg bg-gray-100 p-4'>
+        <p>fcmToken: {fcmToken}</p>
+        <p>messages: {JSON.stringify(messages)}</p>
       </div>
     </div>
   )

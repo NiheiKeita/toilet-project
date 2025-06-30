@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { ArrowLeft, Mic, MicOff, Type } from 'lucide-react'
 import LanguageSelector from '../../components/LanguageSelector'
-import { useFCM } from '../../firebase/useFCM'
 import { getCurrentLanguage, getTranslation } from '~/utils/i18n'
 import { useRouter } from 'next/router'
 import { SpeechRecognition } from '~/types/speech'
@@ -124,16 +123,6 @@ const ToiletStall = ({ stallId }: Props) => {
   const handleLanguageChange = (lang: string) => {
     setCurrentLang(lang)
   }
-  const { messages, fcmToken } = useFCM()
-
-  useEffect(() => {
-    // 現在の通知許可状態を取得
-    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission !== 'granted') {
-      Notification.requestPermission().then((permission) => {
-        alert(permission)
-      })
-    }
-  }, [])
 
   return (
     <div className="min-h-screen p-6">
@@ -407,10 +396,6 @@ const ToiletStall = ({ stallId }: Props) => {
             </div>
           </div>
         )}
-      </div>
-      <div className='rounded-lg bg-gray-100 p-4'>
-        <p>fcmToken: {fcmToken}</p>
-        <p>messages: {JSON.stringify(messages)}</p>
       </div>
     </div>
   )

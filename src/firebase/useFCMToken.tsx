@@ -20,8 +20,8 @@ const useFCMToken = () => {
         if (!isFCMSupported) return
 
         // Service Workerの登録
-        await navigator.serviceWorker.register('/web-push/firebase-messaging-sw.js', {
-          scope: '/web-push/'
+        await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
+          scope: '/'
         })
 
         const token = await getToken(messaging, {

@@ -14,6 +14,7 @@ export const useFCM = () => {
 
     try {
       const unsubscribe = onMessage(messaging, (payload: MessagePayload) => {
+        console.log('FCMメッセージを受信しました:', payload)
         setMessages((messages) => [...messages, payload])
       })
 

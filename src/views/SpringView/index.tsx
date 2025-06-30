@@ -24,6 +24,7 @@ const SpringPage: React.FC = () => {
   const [stats, setStats] = useState({ totalWords: 0, activeWords: 0 })
   const [currentLang, setCurrentLang] = useState('ja')
   const { messages, fcmToken } = useFCM()
+  console.log(fcmToken)
 
   useMount(() => {
     // 現在の通知許可状態を取得
@@ -177,19 +178,19 @@ const SpringPage: React.FC = () => {
     setCurrentLang(lang)
   }
 
-  const handleClick = () => {
-    const newWord: FloatingWord = {
-      id: `fcm-${Date.now()}-${Math.random()}`,
-      text: "d",
-      x: Math.random() * 80 + 10, // 10-90% from left
-      y: Math.random() * 60 + 20, // 20-80% from top
-      opacity: 1, // 最初は完全に表示
-      size: Math.random() * 0.8 + 0.6, // 0.6-1.4 scale（より多様なサイズ）
-      sinkSpeed: Math.random() * 0.15 + 0.03, // 0.03-0.18 per second（より多様な速度）
-      timestamp: Date.now() // 少しずつ遅延させて表示
-    }
-    setFloatingWords(prev => [...prev, newWord])
-  }
+  // const handleClick = () => {
+  //   const newWord: FloatingWord = {
+  //     id: `fcm-${Date.now()}-${Math.random()}`,
+  //     text: "d",
+  //     x: Math.random() * 80 + 10, // 10-90% from left
+  //     y: Math.random() * 60 + 20, // 20-80% from top
+  //     opacity: 1, // 最初は完全に表示
+  //     size: Math.random() * 0.8 + 0.6, // 0.6-1.4 scale（より多様なサイズ）
+  //     sinkSpeed: Math.random() * 0.15 + 0.03, // 0.03-0.18 per second（より多様な速度）
+  //     timestamp: Date.now() // 少しずつ遅延させて表示
+  //   }
+  //   setFloatingWords(prev => [...prev, newWord])
+  // }
 
   const handleRemove = (id: string) => {
     setFloatingWords(prev => prev.filter(t => t.id !== id))

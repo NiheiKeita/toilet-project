@@ -76,7 +76,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Vite
+      - name: Build Next.js
         run: npm run build
 
       - name: FTP-Deploy-Action
@@ -85,7 +85,7 @@ jobs:
           server: ${{ secrets.STG_FTP_SERVER }}
           username: ${{ secrets.STG_FTP_USERNAME }}
           password: ${{ secrets.STG_FTP_PASSWORD }}
-          local-dir: ./dist/
+          local-dir: ./out/
           server-dir: ./
           exclude: |
             **/node_modules/**

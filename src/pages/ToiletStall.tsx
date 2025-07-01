@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mic, MicOff, Type } from 'lucide-react';
 import LanguageSelector from '../components/LanguageSelector';
 import { getTranslation, getCurrentLanguage } from '../utils/i18n';
+import { useFCM } from '../firebase/useFCM';
 
 const ToiletStall: React.FC = () => {
   const { stallId } = useParams();
@@ -108,6 +109,16 @@ const ToiletStall: React.FC = () => {
   const handleLanguageChange = (lang: string) => {
     setCurrentLang(lang);
   };
+  const { messages, fcmToken } = useFCM()
+
+  useEffect(() => {
+    // 現在の通知許可状態を取得
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission !== 'granted') {
+      Notification.requestPermission().then((permission) => {
+        alert(permission)
+      })
+    }
+  }, [])
 
   return (
     <div className="min-h-screen p-6">
@@ -381,6 +392,10 @@ const ToiletStall: React.FC = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className='bg-gray-100 p-4 rounded-lg'>
+        <p>fcmToken: {fcmToken}</p>
+        <p>messages: {JSON.stringify(messages)}</p>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 name: deploy to stg-xserver
 
-on: 
-  push:
-    tags:
-      - 'stg.v.*'
+on: ["pull_request"]
+# on: 
+#   push:
+#     tags:
+#       - 'stg.v.*'
 
 jobs:
   deploy:
@@ -15,6 +16,62 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+
+      - name: Create .env file and firebase-messaging-sw.js
+        run: |
+          # .envファイルを作成
+          cat > .env << EOF
+          # Firebase Configuration
+          VITE_FIREBASE_APP_ID=${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_API_KEY=${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN=${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID=${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET=${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID=${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
+          VITE_FIREBASE_VAPID_KEY=${{ secrets.VITE_FIREBASE_VAPID_KEY }}
+          EOF
+          
+          # publicディレクトリを作成
+          mkdir -p public
+          
+          # firebase-messaging-sw.jsファイルを作成
+          cat > public/firebase-messaging-sw.js << EOF
+          // Firebase Cloud Messaging Service Worker
+          importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
+          importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
+          
+          // Firebase設定
+          const firebaseConfig = {
+            apiKey: "${{ secrets.VITE_FIREBASE_API_KEY }}",
+            authDomain: "${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}",
+            projectId: "${{ secrets.VITE_FIREBASE_PROJECT_ID }}",
+            storageBucket: "${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}",
+            messagingSenderId: "${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}",
+            appId: "${{ secrets.VITE_FIREBASE_APP_ID }}"
+          };
+          
+          // Firebase初期化
+          firebase.initializeApp(firebaseConfig);
+          
+          // Messagingインスタンス取得
+          const messaging = firebase.messaging();
+          
+          // バックグラウンドメッセージハンドラー
+          messaging.onBackgroundMessage((payload) => {
+            console.log('[firebase-messaging-sw.js] Received background message ', payload);
+          
+            const notificationTitle = payload.notification?.title || '新しいメッセージ';
+            const notificationOptions = {
+              body: payload.notification?.body || '',
+              icon: '/favicon.ico',
+              badge: '/favicon.ico',
+              data: payload.data || {}
+            };
+          
+            return self.registration.showNotification(notificationTitle, notificationOptions);
+          });
+          EOF
 
       - name: Install dependencies
         run: npm install

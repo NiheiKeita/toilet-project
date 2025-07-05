@@ -95,12 +95,41 @@ const ToiletStall = ({ stallId }: Props) => {
     }
   }
 
-  const handleFlush = () => {
+  const handleFlush = async () => {
     if (!inputText.trim()) return
 
     const words = inputText.split('').filter(char => char.trim())
     setFlushWords(words)
     setIsFlushing(true)
+
+    // 全デバイスに通知を送信
+    try {
+      const response = await fetch('/api/send-all-devices/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: inputText,
+          body: inputText,
+          data: {
+            type: 'flush_notification',
+            stallId: stallId,
+            language: currentLang,
+            timestamp: new Date().toISOString(),
+            messageLength: inputText.length.toString()
+          }
+        }),
+      })
+
+      if (response.ok) {
+        console.log('全デバイスに通知を送信しました')
+      } else {
+        console.error('通知送信に失敗しました:', response.status)
+      }
+    } catch (error) {
+      console.error('通知送信エラー:', error)
+    }
 
     // Simulate flush animation duration
     setTimeout(() => {

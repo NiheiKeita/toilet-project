@@ -109,15 +109,16 @@ jobs:
             **/tests/**
             **/tests-examples/**
             **/.github/**
+            **/.git/**
             **/.next/cache/**
-            .env
+            **/.next/trace/**
+            **/.next/trace-events.json
             .env.local
             .env.production
             .env.development
             *.log
             *.cache
             package-lock.json
-            package.json
             tsconfig.json
             tailwind.config.ts
             postcss.config.js
@@ -127,4 +128,3 @@ jobs:
             sonar-project.properties
             README.md
             next.config.mjs
-            firebase_env.json

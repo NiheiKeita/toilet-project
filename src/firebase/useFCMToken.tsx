@@ -29,6 +29,25 @@ const useFCMToken = () => {
           serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
         })
         setFcmToken(token)
+
+        // 全デバイストピックに自動登録
+        if (token) {
+          try {
+            await fetch('/api/subscribe-topic/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                token: token,
+                topic: 'all_devices'
+              }),
+            })
+            console.log('全デバイストピックに登録しました')
+          } catch (error) {
+            console.error('全デバイストピック登録エラー:', error)
+          }
+        }
       } catch (error) {
         console.error('FCMトークン取得エラー:', error)
       }

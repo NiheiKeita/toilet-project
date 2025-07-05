@@ -11,7 +11,7 @@ export const languages: Language[] = [
   { code: 'zh', name: '中文', flag: '🇨🇳' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
-];
+]
 
 export const translations = {
   ja: {
@@ -69,7 +69,7 @@ export const translations = {
     springTitle: '言葉の泉',
     currentWords: '現在漂っている言葉',
     totalWords: 'これまでの総数',
-    springMessage: '自分の流した言葉がこの泉で静かに眠ります。',
+    springMessage: '誰かが流した言葉がこの泉で静かに眠ります。',
     springSubMessage: 'あなたの心の重荷も、時間と共に軽やかになっていくでしょう',
     flushAgain: 'もう一度流す',
     words: 'words',
@@ -130,7 +130,7 @@ export const translations = {
     springTitle: 'Word Spring',
     currentWords: 'Currently floating words',
     totalWords: 'Total words so far',
-    springMessage: 'The words you have flushed now rest quietly in this spring.',
+    springMessage: 'Words that someone has flushed now rest quietly in this spring.',
     springSubMessage: 'Your emotional burdens will also become lighter with time',
     flushAgain: 'Flush Again',
     words: 'words',
@@ -191,7 +191,7 @@ export const translations = {
     springTitle: '말의 샘',
     currentWords: '현재 떠다니는 말',
     totalWords: '지금까지의 총 개수',
-    springMessage: '당신이 흘려보낸 말이 이 샘에서 조용히 잠듭니다.',
+    springMessage: '누군가가 흘려보낸 말이 이 샘에서 조용히 잠듭니다.',
     springSubMessage: '당신의 마음의 짐도 시간과 함께 가벼워질 것입니다',
     flushAgain: '다시 흘려보내기',
     words: 'words',
@@ -252,7 +252,7 @@ export const translations = {
     springTitle: '话语之泉',
     currentWords: '目前漂浮的话语',
     totalWords: '至今为止的总数',
-    springMessage: '你冲走的话语在这个泉水中静静地沉睡。',
+    springMessage: '有人冲走的话语在这个泉水中静静地沉睡。',
     springSubMessage: '你心中的负担也会随着时间变得轻松',
     flushAgain: '再次冲洗',
     words: '个词',
@@ -313,7 +313,7 @@ export const translations = {
     springTitle: 'Manantial de Palabras',
     currentWords: 'Palabras flotando actualmente',
     totalWords: 'Total de palabras hasta ahora',
-    springMessage: 'Las palabras que has lavado descansan tranquilamente en este manantial.',
+    springMessage: 'Las palabras que alguien ha lavado descansan tranquilamente en este manantial.',
     springSubMessage: 'Tus cargas emocionales también se volverán más ligeras con el tiempo',
     flushAgain: 'Lavar de Nuevo',
     words: 'palabras',
@@ -374,24 +374,31 @@ export const translations = {
     springTitle: 'Source des Mots',
     currentWords: 'Mots flottant actuellement',
     totalWords: "Total des mots jusqu'à présent",
-    springMessage: 'Les mots que vous avez évacués reposent tranquillement dans cette source.',
+    springMessage: 'Les mots que quelqu\'un a évacués reposent tranquillement dans cette source.',
     springSubMessage: 'Vos fardeaux émotionnels deviendront aussi plus légers avec le temps',
     flushAgain: 'Évacuer à Nouveau',
     words: 'mots',
   },
-};
+}
 
-export type TranslationKey = keyof typeof translations.ja;
+export type TranslationKey = keyof typeof translations.ja
 
 export const getTranslation = (key: TranslationKey, lang: string = 'ja'): string => {
-  const langTranslations = translations[lang as keyof typeof translations] || translations.ja;
-  return langTranslations[key] || translations.ja[key];
-};
+  const langTranslations = translations[lang as keyof typeof translations] || translations.ja
+
+  return langTranslations[key] || translations.ja[key]
+}
 
 export const getCurrentLanguage = (): string => {
-  return localStorage.getItem('language') || 'ja';
-};
+  if (typeof window !== 'undefined' && window.localStorage) {
+    return localStorage.getItem('language') || 'ja'
+  }
+
+  return 'ja'
+}
 
 export const setCurrentLanguage = (lang: string): void => {
-  localStorage.setItem('language', lang);
-};
+  if (typeof window !== 'undefined' && window.localStorage) {
+    localStorage.setItem('language', lang)
+  }
+}

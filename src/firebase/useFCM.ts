@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import { MessagePayload, onMessage } from "firebase/messaging"
 import useFCMToken from "./useFCMToken"
@@ -14,7 +13,8 @@ export const useFCM = () => {
     if (!messaging) return
 
     try {
-      const unsubscribe = onMessage(messaging, (payload) => {
+      const unsubscribe = onMessage(messaging, (payload: MessagePayload) => {
+        console.log('FCMメッセージを受信しました:', payload)
         setMessages((messages) => [...messages, payload])
       })
 

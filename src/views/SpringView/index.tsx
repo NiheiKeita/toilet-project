@@ -24,7 +24,6 @@ const SpringPage: React.FC = () => {
   const [stats, setStats] = useState({ totalWords: 0, activeWords: 0 })
   const [currentLang, setCurrentLang] = useState('ja')
   const { messages, fcmToken } = useFCM()
-  console.log(fcmToken)
 
   useMount(() => {
     // 現在の通知許可状態を取得
@@ -33,6 +32,7 @@ const SpringPage: React.FC = () => {
         alert(permission)
       })
     }
+    console.log(fcmToken)
   })
 
   // FCMメッセージを受信したときにfloating wordsを生成

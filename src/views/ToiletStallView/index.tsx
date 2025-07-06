@@ -101,24 +101,19 @@ const ToiletStall = ({ stallId }: Props) => {
     const words = inputText.split('').filter(char => char.trim())
     setFlushWords(words)
     setIsFlushing(true)
-
-    // 全デバイスに通知を送信
+    // 全デバイスに通知を送信（外部API使用）
     try {
-      const response = await fetch('/api/send-all-devices/', {
+      // 外部APIエンドポイント（例：Vercel Functions、Netlify Functions等）
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/send-to-all'
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          message: inputText,
           title: inputText,
-          body: inputText,
-          data: {
-            type: 'flush_notification',
-            stallId: stallId,
-            language: currentLang,
-            timestamp: new Date().toISOString(),
-            messageLength: inputText.length.toString()
-          }
         }),
       })
 

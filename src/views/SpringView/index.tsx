@@ -25,6 +25,45 @@ const SpringPage: React.FC = () => {
   const [currentLang, setCurrentLang] = useState('ja')
   const { messages, fcmToken } = useFCM()
 
+  // console.log(fcmToken)
+
+  // FCMトークンをLaravelのAPIに登録する関数
+  // const registerDeviceToken = async (token: string) => {
+  //   try {
+  //     console.log('取得したトークン:', token)
+  //     const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  //     // LaravelのAPIにトークンを登録
+  //     const response = await fetch(apiUrl + '/register-token', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         token: token
+  //       })
+  //     })
+
+  //     const result = await response.json()
+
+  //     if (result.success) {
+  //       console.log('トークン登録成功:', result.message)
+  //     } else {
+  //       console.error('トークン登録失敗:', result.error)
+  //     }
+
+  //   } catch (error) {
+  //     console.error('トークン取得・登録エラー:', error)
+  //   }
+  // }
+
+  // FCMトークンが取得された時にLaravelのAPIに登録
+  // useEffect(() => {
+  //   if (fcmToken) {
+  //     registerDeviceToken(fcmToken)
+  //   }
+  // }, [fcmToken])
+
   useMount(() => {
     // 現在の通知許可状態を取得
     if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission !== 'granted') {
@@ -32,7 +71,6 @@ const SpringPage: React.FC = () => {
         alert(permission)
       })
     }
-    console.log(fcmToken)
   })
 
   // FCMメッセージを受信したときにfloating wordsを生成

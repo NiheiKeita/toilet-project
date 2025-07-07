@@ -23,7 +23,7 @@ const SpringPage: React.FC = () => {
   const [floatingWords, setFloatingWords] = useState<FloatingWord[]>([])
   const [stats, setStats] = useState({ totalWords: 0, activeWords: 0 })
   const [currentLang, setCurrentLang] = useState('ja')
-  const { messages, fcmToken } = useFCM()
+  const { messages } = useFCM()
 
   // console.log(fcmToken)
 

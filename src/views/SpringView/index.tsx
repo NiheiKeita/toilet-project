@@ -66,10 +66,26 @@ const SpringPage: React.FC = () => {
 
   useMount(() => {
     // 現在の通知許可状態を取得
-    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission !== 'granted') {
-      Notification.requestPermission().then((permission) => {
-        alert(permission)
-      })
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      if (Notification.permission === 'default') {
+        // 許可状態が未設定の場合、許可を要求
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            console.log('通知許可が取得されました')
+          } else if (permission === 'denied') {
+            console.log('通知許可が拒否されました')
+            // ユーザーに通知設定の変更を促すメッセージを表示
+            alert('プッシュ通知を受信するには、ブラウザの通知設定を許可してください。')
+          }
+        })
+      } else if (Notification.permission === 'denied') {
+        // 既に拒否されている場合
+        console.log('通知許可が拒否されています')
+        // ユーザーに通知設定の変更を促すメッセージを表示
+        alert('プッシュ通知を受信するには、ブラウザの通知設定を許可してください。')
+      } else if (Notification.permission === 'granted') {
+        console.log('通知許可が既に取得されています')
+      }
     }
   })
 

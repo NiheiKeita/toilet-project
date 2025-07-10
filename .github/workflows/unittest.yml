@@ -69,12 +69,12 @@ jobs:
       run: npm run build
 
     - name: Start application
-      run: npx serve@latest out -p 3000 &
+      run: npx serve@latest out -p 3001 &
       env:
         CI: true
 
     - name: Wait for application to be ready
-      run: npx wait-on http://localhost:3000 --timeout 60000
+      run: npx wait-on http://localhost:3001 --timeout 60000
 
     - name: Run Playwright tests
       run: npx playwright test --timeout=600000

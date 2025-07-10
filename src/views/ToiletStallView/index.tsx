@@ -164,9 +164,6 @@ const ToiletStall = ({ stallId }: Props) => {
           </div>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
         </div>
-        {/* <h1 className="text-2xl font-bold text-gray-800">
-          {getTranslation(currentStall.name as any, currentLang)}
-        </h1> */}
         <div>
           <p className="mb-4 mt-1 text-2xl text-gray-600">
             {getTranslation(currentStall.description as any, currentLang)}

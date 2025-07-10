@@ -44,16 +44,6 @@ const useFCMToken = () => {
                 token: token
               })
             })
-            // await fetch('/api/subscribe-topic/', {
-            //   method: 'POST',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //   },
-            //   body: JSON.stringify({
-            //     token: token,
-            //     topic: 'all_devices'
-            //   }),
-            // })
             console.log('全デバイストピックに登録しました')
           } catch (error) {
             console.error('全デバイストピック登録エラー:', error)

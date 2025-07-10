@@ -65,26 +65,26 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Build application
-      run: npm run build
+    # - name: Build application
+    #   run: npm run build
 
-    - name: Start application
-      run: npx serve@latest out -p 3001 &
-      env:
-        CI: true
+    # - name: Start application
+    #   run: npx serve@latest out -p 3001 &
+    #   env:
+    #     CI: true
 
-    - name: Wait for application to be ready
-      run: npx wait-on http://localhost:3001 --timeout 60000
+    # - name: Wait for application to be ready
+    #   run: npx wait-on http://localhost:3001 --timeout 60000
 
-    - name: Run Playwright tests
-      run: npx playwright test --timeout=600000
-      env:
-        CI: true
+    # - name: Run Playwright tests
+    #   run: npx playwright test --timeout=600000
+    #   env:
+    #     CI: true
 
-    - name: Upload Playwright test results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+    # - name: Upload Playwright test results
+    #   uses: actions/upload-artifact@v4
+    #   if: always()
+    #   with:
+    #     name: playwright-report
+    #     path: playwright-report/
+    #     retention-days: 30

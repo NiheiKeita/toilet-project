@@ -132,7 +132,7 @@ const SpringPage: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden" data-testid="test-spring-page">
       {/* Water Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-blue-200 to-blue-400">
         {/* Water surface animation */}

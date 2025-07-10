@@ -25,45 +25,6 @@ const SpringPage: React.FC = () => {
   const [currentLang, setCurrentLang] = useState('ja')
   const { messages } = useFCM()
 
-  // console.log(fcmToken)
-
-  // FCMトークンをLaravelのAPIに登録する関数
-  // const registerDeviceToken = async (token: string) => {
-  //   try {
-  //     console.log('取得したトークン:', token)
-  //     const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  //     // LaravelのAPIにトークンを登録
-  //     const response = await fetch(apiUrl + '/register-token', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         token: token
-  //       })
-  //     })
-
-  //     const result = await response.json()
-
-  //     if (result.success) {
-  //       console.log('トークン登録成功:', result.message)
-  //     } else {
-  //       console.error('トークン登録失敗:', result.error)
-  //     }
-
-  //   } catch (error) {
-  //     console.error('トークン取得・登録エラー:', error)
-  //   }
-  // }
-
-  // FCMトークンが取得された時にLaravelのAPIに登録
-  // useEffect(() => {
-  //   if (fcmToken) {
-  //     registerDeviceToken(fcmToken)
-  //   }
-  // }, [fcmToken])
-
   useMount(() => {
     // 現在の通知許可状態を取得
     if (typeof window !== 'undefined' && 'Notification' in window) {
@@ -102,7 +63,7 @@ const SpringPage: React.FC = () => {
         .split('')
         .filter(char => char.trim()) // 空白文字を除外
         .map(char => char === ' ' ? '　' : char) // 半角スペースを全角スペースに変換
-      //   '新しいメッセージ'
+
       textChars.forEach((word, index) => {
         const newWord: FloatingWord = {
           id: `${word}-${index}`,
@@ -116,72 +77,6 @@ const SpringPage: React.FC = () => {
         }
         setFloatingWords(prev => [...prev, newWord])
       })
-
-      // const words = textChars.map((word: any, index: number) => ({
-      //   id: `${word.timestamp}-${index}`,
-      //   text: word.text,
-      //   x: Math.random() * 80 + 10, // 10-90% from left
-      //   y: Math.random() * 60 + 20, // 20-80% from top
-      //   opacity: Math.max(0.3, 1 - (Date.now() - word.timestamp) / 60000), // Fade over 1 minute
-      //   size: Math.random() * 0.5 + 0.8, // 0.8-1.3 scale
-      //   sinkSpeed: Math.random() * 0.1 + 0.05, // 0.05-0.15 per second
-      //   timestamp: word.timestamp
-      // })).filter((word: FloatingWord) => word.opacity > 0)
-      // setFloatingWords(prev => [...prev, ...words])
-      // const latestMessage = messages[messages.length - 1]
-
-      // // メッセージからテキストを抽出
-      // const messageText = latestMessage.notification?.title ||
-      //   latestMessage.notification?.body ||
-      //   latestMessage.data?.text ||
-      //   '新しいメッセージ'
-
-      // // テキストを文字単位でバラバラにする
-      // const textChars = messageText
-      //   .split('')
-      //   .filter(char => char.trim()) // 空白文字を除外
-      //   .map(char => char === ' ' ? '' : char) // 半角スペースを全角スペースに変換
-
-      // // 各文字をfloating wordとして生成
-      // const newWords: FloatingWord[] = textChars.map((char, index) => ({
-      //   id: `fcm-${Date.now()}-${index}-${Math.random()}`,
-      //   text: char,
-      //   x: Math.random() * 80 + 10, // 10-90% from left
-      //   y: Math.random() * 60 + 20, // 20-80% from top
-      //   opacity: 1, // 最初は完全に表示
-      //   size: Math.random() * 0.8 + 0.6, // 0.6-1.4 scale（より多様なサイズ）
-      //   sinkSpeed: Math.random() * 0.15 + 0.03, // 0.03-0.18 per second（より多様な速度）
-      //   timestamp: Date.now() + index * 50 // 少しずつ遅延させて表示
-      // }))
-
-      // // floating wordsに追加（少しずつ遅延させて表示）
-      // newWords.forEach((word, index) => {
-      //   setTimeout(() => {
-      //     setFloatingWords(prevWords => [...prevWords, word])
-
-      //     // 統計を更新
-      //     setStats(prevStats => ({
-      //       totalWords: prevStats.totalWords + 1,
-      //       activeWords: prevStats.activeWords + 1
-      //     }))
-      //   }, index * 100) // 100msずつ遅延（より速く表示）
-      // })
-
-      // // 新しいメッセージアラートを表示
-      // setShowNewMessageAlert(true)
-      // setTimeout(() => setShowNewMessageAlert(false), 3000)
-
-      // // localStorageにも保存
-      // if (typeof window !== 'undefined' && window.localStorage) {
-      //   const existingWords = JSON.parse(localStorage.getItem('flushedWords') || '[]')
-      //   const newStoredWords = textChars.map(char => ({
-      //     text: char,
-      //     timestamp: Date.now(),
-      //     source: 'fcm',
-      //     language: currentLang
-      //   }))
-      //   localStorage.setItem('flushedWords', JSON.stringify([...existingWords, ...newStoredWords]))
-      // }
     }
   }, [messages, currentLang])
 
@@ -232,20 +127,6 @@ const SpringPage: React.FC = () => {
     setCurrentLang(lang)
   }
 
-  // const handleClick = () => {
-  //   const newWord: FloatingWord = {
-  //     id: `fcm-${Date.now()}-${Math.random()}`,
-  //     text: "d",
-  //     x: Math.random() * 80 + 10, // 10-90% from left
-  //     y: Math.random() * 60 + 20, // 20-80% from top
-  //     opacity: 1, // 最初は完全に表示
-  //     size: Math.random() * 0.8 + 0.6, // 0.6-1.4 scale（より多様なサイズ）
-  //     sinkSpeed: Math.random() * 0.15 + 0.03, // 0.03-0.18 per second（より多様な速度）
-  //     timestamp: Date.now() // 少しずつ遅延させて表示
-  //   }
-  //   setFloatingWords(prev => [...prev, newWord])
-  // }
-
   const handleRemove = (id: string) => {
     setFloatingWords(prev => prev.filter(t => t.id !== id))
   }
@@ -287,12 +168,6 @@ const SpringPage: React.FC = () => {
                 {getTranslation('springTitle', currentLang)}
               </h1>
             </div>
-            {/* <button
-              onClick={handleClick}
-              className=" left-4 top-4 rounded bg-blue-500 px-4 py-2 text-white shadow"
-            >
-              文字を出す
-            </button> */}
           </div>
 
           <div className="flex items-center space-x-4">
@@ -343,9 +218,6 @@ const SpringPage: React.FC = () => {
           <p className="mb-2 text-gray-700">
             {getTranslation('springMessage', currentLang)}
           </p>
-          {/* <p className="text-sm text-gray-500">
-            {getTranslation('springSubMessage', currentLang)}
-          </p> */}
         </div>
       </div>
 
@@ -359,28 +231,7 @@ const SpringPage: React.FC = () => {
         </button>
       </div>
 
-      {/* FCM Debug Info */}
-      {/* <div className="absolute bottom-6 left-6 z-10 max-w-sm rounded-lg bg-white/90 p-4 backdrop-blur-sm">
-        <h3 className="mb-2 text-sm font-semibold text-gray-700">FCM Debug Info</h3>
-        <div className="text-xs text-gray-600">
-          <p className="mb-1">
-            <span className="font-medium">Token:</span> {fcmToken}
-          </p>
-          <p className="mb-1">
-            <span className="font-medium">Messages received:</span> {messages.length}
-          </p>
-          {messages.length > 0 && (
-            <div className="mt-2">
-              <p className="font-medium text-gray-700">Latest message:</p>
-              <div className="rounded bg-gray-100 p-2 text-xs">
-                <p><strong>Title:</strong> {messages[messages.length - 1].notification?.title || 'N/A'}</p>
-                <p><strong>Body:</strong> {messages[messages.length - 1].notification?.body || 'N/A'}</p>
-                <p><strong>Data:</strong> {JSON.stringify(messages[messages.length - 1].data || {})}</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </div> */}
+
     </div >
   )
 }

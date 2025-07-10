@@ -19,6 +19,7 @@ const useFCMToken = () => {
         const isFCMSupported = await isSupported()
         if (!isFCMSupported) return
 
+
         // Service Workerの登録
         await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
           scope: '/'
@@ -29,6 +30,25 @@ const useFCMToken = () => {
           serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
         })
         setFcmToken(token)
+
+        // 全デバイストピックに自動登録
+        if (token) {
+          try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL
+            await fetch(apiUrl + '/register-token', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                token: token
+              })
+            })
+            console.log('全デバイストピックに登録しました')
+          } catch (error) {
+            console.error('全デバイストピック登録エラー:', error)
+          }
+        }
       } catch (error) {
         console.error('FCMトークン取得エラー:', error)
       }

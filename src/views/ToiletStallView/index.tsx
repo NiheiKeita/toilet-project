@@ -95,12 +95,36 @@ const ToiletStall = ({ stallId }: Props) => {
     }
   }
 
-  const handleFlush = () => {
+  const handleFlush = async () => {
     if (!inputText.trim()) return
 
     const words = inputText.split('').filter(char => char.trim())
     setFlushWords(words)
     setIsFlushing(true)
+    // 全デバイスに通知を送信（外部API使用）
+    try {
+      // 外部APIエンドポイント（例：Vercel Functions、Netlify Functions等）
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/send-to-all'
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: inputText,
+          title: inputText,
+        }),
+      })
+
+      if (response.ok) {
+        console.log('全デバイスに通知を送信しました')
+      } else {
+        console.error('通知送信に失敗しました:', response.status)
+      }
+    } catch (error) {
+      console.error('通知送信エラー:', error)
+    }
 
     // Simulate flush animation duration
     setTimeout(() => {
@@ -140,9 +164,6 @@ const ToiletStall = ({ stallId }: Props) => {
           </div>
           <LanguageSelector onLanguageChange={handleLanguageChange} />
         </div>
-        {/* <h1 className="text-2xl font-bold text-gray-800">
-          {getTranslation(currentStall.name as any, currentLang)}
-        </h1> */}
         <div>
           <p className="mb-4 mt-1 text-2xl text-gray-600">
             {getTranslation(currentStall.description as any, currentLang)}

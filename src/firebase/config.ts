@@ -26,10 +26,10 @@ if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
       // Service Workerの登録を確認
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/firebase-messaging-sw.js')
-          .then((registration) => {
+          .then(() => {
             console.log('Service Worker登録成功')
           })
-          .catch((error) => {
+          .catch(() => {
             console.error('Service Worker登録エラー')
           })
       }

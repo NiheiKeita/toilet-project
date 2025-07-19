@@ -27,14 +27,14 @@ if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/firebase-messaging-sw.js')
           .then((registration) => {
-            console.log('Service Worker登録成功:', registration)
+            console.log('Service Worker登録成功')
           })
           .catch((error) => {
-            console.error('Service Worker登録エラー:', error)
+            console.error('Service Worker登録エラー')
           })
       }
     } catch (error) {
-      console.error('Firebase Messaging初期化エラー:', error)
+      console.error('Firebase Messaging初期化エラー')
     }
   }
 }

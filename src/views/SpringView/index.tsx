@@ -78,7 +78,7 @@ const SpringPage: React.FC = () => {
         setFloatingWords(prev => [...prev, newWord])
       })
     }
-  }, [messages, currentLang])
+  }, [messages])
 
   useEffect(() => {
     // クライアントサイドでのみ言語を取得

@@ -101,6 +101,7 @@ const ToiletStall = ({ stallId }: Props) => {
     const words = inputText.split('').filter(char => char.trim())
     setFlushWords(words)
     setIsFlushing(true)
+    const start = Date.now() // 開始時刻を記録
     // 全デバイスに通知を送信（外部API使用）
     try {
       // 外部APIエンドポイント（例：Vercel Functions、Netlify Functions等）
@@ -126,7 +127,9 @@ const ToiletStall = ({ stallId }: Props) => {
       console.error('通知送信エラー:', error)
     }
 
-    // Simulate flush animation duration
+    // API開始から4秒後に処理を実行
+    const elapsed = Date.now() - start
+    const wait = Math.max(0, 4000 - elapsed)
     setTimeout(() => {
       // Store flushed words in localStorage for spring page (only on client side)
       if (typeof window !== 'undefined' && window.localStorage) {
@@ -141,7 +144,7 @@ const ToiletStall = ({ stallId }: Props) => {
       }
 
       router.push('/complete')
-    }, 4000)
+    }, wait)
   }
 
   const handleLanguageChange = (lang: string) => {

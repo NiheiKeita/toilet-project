@@ -78,15 +78,6 @@ jobs:
           messaging.onBackgroundMessage((payload) => {
             console.log('[firebase-messaging-sw.js] Received background message');
           
-            const notificationTitle = payload.notification?.title || '新しいメッセージ';
-            const notificationOptions = {
-              body: payload.notification?.body || '',
-              icon: '/favicon.ico',
-              badge: '/favicon.ico',
-              data: payload.data || {}
-            };
-          
-            return self.registration.showNotification(notificationTitle, notificationOptions);
           });
           EOF
 

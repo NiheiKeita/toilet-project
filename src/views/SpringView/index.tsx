@@ -50,34 +50,7 @@ const SpringPage: React.FC = () => {
     }
   })
 
-  // FCMメッセージを受信したときにfloating wordsを生成
-  useEffect(() => {
-    if (messages.length > 0) {
-      const latestMessage = messages[messages.length - 1]
 
-      console.log(latestMessage.data)
-      // メッセージからテキストを抽出
-      const messageText = latestMessage.data?.message ?? ''
-      const textChars = messageText
-        .split('')
-        .filter(char => char.trim()) // 空白文字を除外
-        .map(char => char === ' ' ? '　' : char) // 半角スペースを全角スペースに変換
-
-      textChars.forEach((word, index) => {
-        const newWord: FloatingWord = {
-          id: `${word}-${index}`,
-          text: word,
-          x: Math.random() * 80 + 10, // 10-90% from left
-          y: Math.random() * 60 + 20, // 20-80% from top
-          opacity: 1, // 最初は完全に表示
-          size: Math.random() * 0.8 + 0.6, // 0.6-1.4 scale（より多様なサイズ）
-          sinkSpeed: Math.random() * 0.15 + 0.03, // 0.03-0.18 per second（より多様な速度）
-          timestamp: Date.now() // 少しずつ遅延させて表示
-        }
-        setFloatingWords(prev => [...prev, newWord])
-      })
-    }
-  }, [messages])
 
   useEffect(() => {
     // クライアントサイドでのみ言語を取得
@@ -121,6 +94,52 @@ const SpringPage: React.FC = () => {
 
     return () => clearInterval(animationInterval)
   }, [])
+
+  // FCMメッセージを受信したときにlocalStorageに保存
+  useEffect(() => {
+    if (messages.length > 0) {
+      const latestMessage = messages[messages.length - 1]
+
+      // メッセージからテキストを抽出
+      const messageText = latestMessage.data?.message || latestMessage.notification?.title || latestMessage.notification?.body || ''
+
+      if (messageText && typeof window !== 'undefined' && window.localStorage) {
+        // 既存のflushedWordsを取得
+        const existingWords = JSON.parse(localStorage.getItem('flushedWords') || '[]')
+
+        // 新しい言葉を文字ごとに分割して保存
+        const textChars = messageText
+          .split('')
+          .filter(char => char.trim()) // 空白文字を除外
+          .map(char => char === ' ' ? '　' : char) // 半角スペースを全角スペースに変換
+
+        const newWords = textChars.map(char => ({
+          text: char,
+          timestamp: Date.now(),
+          stallId: 'notification',
+          language: currentLang
+        }))
+
+        // localStorageに保存
+        localStorage.setItem('flushedWords', JSON.stringify([...existingWords, ...newWords]))
+
+        // 現在のfloating wordsに追加
+        textChars.forEach((word, index) => {
+          const newWord: FloatingWord = {
+            id: `notification-${word}-${index}-${Date.now()}`,
+            text: word,
+            x: Math.random() * 80 + 10,
+            y: Math.random() * 60 + 20,
+            opacity: 1,
+            size: Math.random() * 0.8 + 0.6,
+            sinkSpeed: Math.random() * 0.15 + 0.03,
+            timestamp: Date.now()
+          }
+          setFloatingWords(prev => [...prev, newWord])
+        })
+      }
+    }
+  }, [messages, currentLang])
 
   const handleLanguageChange = (lang: string) => {
     setCurrentLang(lang)

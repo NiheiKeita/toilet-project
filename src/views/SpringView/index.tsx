@@ -55,10 +55,9 @@ const SpringPage: React.FC = () => {
     if (messages.length > 0) {
       const latestMessage = messages[messages.length - 1]
 
+      console.log(latestMessage.data)
       // メッセージからテキストを抽出
-      const messageText = latestMessage.notification?.title ||
-        latestMessage.notification?.body ||
-        latestMessage.data?.text || '新しいメッセージ'
+      const messageText = latestMessage.data?.message ?? ''
       const textChars = messageText
         .split('')
         .filter(char => char.trim()) // 空白文字を除外

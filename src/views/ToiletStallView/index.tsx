@@ -94,7 +94,19 @@ const ToiletStall = ({ stallId }: Props) => {
       setIsListening(true)
     }
   }
+  function shuffleString(str: string) {
+    // 文字列を配列に変換
+    const chars = str.split('')
 
+    // Fisher-Yates シャッフルアルゴリズム
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chars[i], chars[j]] = [chars[j], chars[i]]
+    }
+
+    // 配列を文字列に戻す
+    return chars.join('')
+  }
   const handleFlush = async () => {
     if (!inputText.trim()) return
 
@@ -106,6 +118,7 @@ const ToiletStall = ({ stallId }: Props) => {
     try {
       // 外部APIエンドポイント（例：Vercel Functions、Netlify Functions等）
       const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/send-to-all'
+      const shuffledText = shuffleString(inputText)
 
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -113,8 +126,8 @@ const ToiletStall = ({ stallId }: Props) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: inputText,
-          title: inputText,
+          message: shuffledText,
+          title: shuffledText,
         }),
       })
 
